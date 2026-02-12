@@ -5,10 +5,10 @@ export let data;
 
 <div class="p-6 space-y-6">
   <div class="flex items-center justify-between">
-    <h1 class="text-2xl font-bold">Jobs Management</h1>
+    <h1 class="text-2xl font-bold">Projects Management</h1>
 
     <button class="btn btn-primary btn-sm">
-    <a href="/projects/create">  + Create Job</a>
+    <a href="/projects/create">  + Create Project</a>
     </button>
   </div>
 

@@ -3,7 +3,7 @@
     console.log(data)
 </script>
 
-{#each data.jobs as job}
+<!-- {#each data.jobs as job}
 {#if job.slug }
     
     {job.slug}
@@ -14,4 +14,10 @@
 
 {/each}
 
-{data.jobs}
+{data.jobs} -->
+
+<div class="flex justify-center">
+
+<h1 class="text-6xl ">Dashboard Under Maintainace </h1>
+
+</div>

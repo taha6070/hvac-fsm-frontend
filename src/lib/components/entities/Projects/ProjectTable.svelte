@@ -71,7 +71,7 @@
             </span>
           </td>
           <td>
-            <a href="/projects/{job.id}">Edit</a>
+            <a href="/projects/{job.id}">View Job</a>
           </td>
 
         </tr>

@@ -7,10 +7,10 @@
     { name: 'Create Project', href: '/projects/create' },
     { name: 'Jobs', href: '/dashboard/jobs' },
     { name: 'Create Job', href: '/dashboard/jobs/create' },
-    { name: 'Employees', href: '/dashboard/employees' },
+    { name: 'Employees', href: '/dashboard/employee' },
     { name: 'Add Employee', href: '/dashboard/employee/create' },
     { name: 'Contacts', href: '/dashboard/contacts' },
-    { name: 'Add Contact', href: 'dashboard/contacts/create' },
+    { name: 'Add Contact', href: '/dashboard/contacts/create' },
    ];
 </script>
 
