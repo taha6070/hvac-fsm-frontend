@@ -32,7 +32,7 @@ export const actions = {
             // 3. Success case
             return {
                 success: true,
-                message: data.detail || "Request processed successfully!",
+                message: data.role || "Request processed successfully!",
                 status: response.status,
                 user: data // Optionally pass user data back to the UI
             };

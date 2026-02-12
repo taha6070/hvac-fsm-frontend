@@ -4,7 +4,7 @@ import type { Handle } from '@sveltejs/kit';
 const SECRET = new TextEncoder().encode('efac76425e2a8b8fb2ed81c6ca019978a84b9e971670e0f6ba28805d04109b32');
 
 export const handle: Handle = async ({ event, resolve }) => {
-  const token = event.cookies.get('session');
+  const token = event.cookies.get('access_token');
 
   if (token) {
     try {

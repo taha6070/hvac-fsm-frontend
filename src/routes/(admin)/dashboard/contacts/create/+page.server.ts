@@ -2,55 +2,75 @@ import { fail } from "@sveltejs/kit";
 import type { Actions } from "./$types";
 
 export const actions = {
-    default: async ({ fetch, request }) => {
-        const formData = await request.formData();
-        
-        // Extract all fields from the form
-        const email = formData.get('email');
-        const password = formData.get('password');
-        const name = formData.get('name');
-        const phone = formData.get('phone');
-        const address = formData.get('address');
+  default: async ({ fetch, request }) => {
+    const formData = await request.formData();
 
-        const cookieHeader = request.headers.get('cookie') || '';
+    const email = formData.get('email')?.toString();
+    const ghl_id = formData.get('ghl_id')?.toString();
 
-        try {
-            const response = await fetch('http://127.0.0.1:8000/api/v1/contacts/', {
-                method: 'POST',
-                headers: {
-                    'accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'cookie': cookieHeader 
-                },
-                // Send all fields to your backend
-                body: JSON.stringify({ 
-                    email, 
-                    password, 
-                    name, 
-                    phone, 
-                    address 
-                })
-            });
+    const name = formData.get('name')?.toString();
+    const phone = formData.get('phone_no')?.toString();
+    const address = formData.get('address')?.toString();
 
-            const data = await response.json().catch(() => ({}));
+    // ✅ Log incoming form data (this logs in your server terminal)
+    console.log("Incoming Form Data:");
+    console.log({
+      email,
+      name,
+      phone,
+      address
+    });
 
-            if (!response.ok) {
-                return fail(response.status, {
-                    success: false,
-                    message: data.detail || "Registration failed. Please check your details.",
-                });
-            }
+    const cookieHeader = request.headers.get('cookie') || '';
 
-            return {
-                success: true,
-                message: data.detail||"Contact Created successfully!",
-            };
+    try {
+      const payload = {
+        ghl_id,
+        email,
+        name,
+        phone,
+        address
+      };
 
-        } catch (err) {
-            return fail(500, {
-                success: false,
-                message: "Backend server is unreachable.",
-            });
-        }
+      // ✅ Log payload before sending to backend
+      console.log("Sending to Backend:", payload);
+
+      const response = await fetch('http://127.0.0.1:8000/api/v1/contacts/', {
+        method: 'POST',
+        headers: {
+          accept: 'application/json',
+          'Content-Type': 'application/json',
+          cookie: cookieHeader
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await response.json().catch(() => ({}));
+
+      // ✅ Log backend response
+      console.log("Backend Response:", data);
+
+      if (!response.ok) {
+        console.error("Backend Error:", data);
+
+        return fail(response.status, {
+          success: false,
+          message: data.detail || "Registration failed. Please check your details."
+        });
+      }
+
+      return {
+        success: true,
+        message: data.detail || "Contact Created successfully!"
+      };
+
+    } catch (err) {
+      console.error("Server Error:", err);
+
+      return fail(500, {
+        success: false,
+        message: "Backend server is unreachable."
+      });
     }
+  }
 } satisfies Actions;

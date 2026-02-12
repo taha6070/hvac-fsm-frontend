@@ -1,85 +1,121 @@
 <script lang="ts">
-	import { 
-        Mail, Phone, MapPin, Send, User, 
-        Wrench, Clock, Building2, ChevronRight 
-    } from '@lucide/svelte';
+	import { Image, Eye, EyeOff, ChevronRight } from '@lucide/svelte';
 	import { createEnhanceHook } from '$lib/hooks/createEnhnaceHook';
 	import { enhance } from '$app/forms';
 	import { PUBLIC_APP_NAME } from '$env/static/public';
 
-	let name = $state('');
 	let email = $state('');
-	let phone = $state('');
+	let ghl_id = $state('');
+	let name = $state('');
+	let phone_no = $state('');
 	let address = $state('');
-	let subject = $state('General Inquiry'); // Dropdown for HVAC context
-	let message = $state('');
 	let loading = $state(false);
-
-	let setLoading = (value: boolean) => (loading = value);
-	let disableSubmit = $derived(!name || !email || message || loading);
+	const setLoading = (value: boolean) => (loading = value);
 </script>
 
-<div class="min-h-screen bg-base-300/50 p-4 md:p-8">
-	<div class="mx-auto max-w-6xl">
-		<div class="mb-8 flex flex-col gap-2">
-			<div class="badge badge-primary font-bold tracking-wider">HVAC ERP SYSTEM</div>
+<div class="min-h-screen flex items-center justify-center bg-base-200 px-4 py-8">
+	<div class="w-full max-w-lg">
+		<div class="card bg-base-100 shadow-xl border border-base-300">
+			<div class="card-body gap-6">
 
-			<div class="lg:col-span-2">
-				<div class="card bg-base-100 shadow-xl border border-base-content/5">
-					<form
-						method="POST"
-						use:enhance={createEnhanceHook({
-							successToast: true,
-							failureToast: true,
-							setLoading
-						})}
-						class="card-body p-8"
+				<h1 class="text-2xl font-bold text-center">Add Customer</h1>
+
+				<form
+					method="POST"
+					use:enhance={createEnhanceHook({
+						successToast: true,
+						failureToast: true,
+						successRedirect: "",
+						setLoading
+					})}
+					class="space-y-4"
+				>
+					<!-- GHL ID -->
+					<div class="form-control">
+						<label class="label">
+							<span class="label-text font-medium">GHL ID</span>
+						</label>
+						<input
+							type="text"
+							class="input input-bordered w-full"
+							placeholder="GHL12345"
+							bind:value={ghl_id}
+							name="ghl_id"
+							required
+						/>
+					</div>
+
+					<!-- Name -->
+					<div class="form-control">
+						<label class="label">
+							<span class="label-text font-medium">Name</span>
+						</label>
+						<input
+							type="text"
+							class="input input-bordered w-full"
+							placeholder="John Doe"
+							bind:value={name}
+							name="name"
+							required
+						/>
+					</div>
+
+					<!-- Email -->
+					<div class="form-control">
+						<label class="label">
+							<span class="label-text font-medium">Email</span>
+						</label>
+						<input
+							type="email"
+							class="input input-bordered w-full"
+							placeholder="john@gmail.com"
+							bind:value={email}
+							name="email"
+							required
+						/>
+					</div>
+
+					<!-- Phone -->
+					<div class="form-control">
+						<label class="label">
+							<span class="label-text font-medium">Phone Number</span>
+						</label>
+						<input
+							type="text"
+							class="input input-bordered w-full"
+							placeholder="+1 234 567 890"
+							bind:value={phone_no}
+							name="phone_no"
+							required
+						/>
+					</div>
+
+					<!-- Address -->
+					<div class="form-control">
+						<label class="label">
+							<span class="label-text font-medium">Address</span>
+						</label>
+						<input
+							type="text"
+							class="input input-bordered w-full"
+							placeholder="123 Main St, New York"
+							bind:value={address}
+							name="address"
+							required
+						/>
+					</div>
+
+					<!-- Submit -->
+					<button
+						type="submit"
+						class="btn btn-primary w-full"
+						disabled={loading}
 					>
-						<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-							<div class="form-control">
-								<label class="label pt-0" for="name"><span class="label-text font-bold">Contact Person</span></label>
-								<label class="input input-bordered flex items-center gap-2 focus-within:outline-primary">
-									<User size={16} class="opacity-40" />
-									<input bind:value={name} name="name" type="text" placeholder="Full Name" required class="w-full" />
-								</label>
-							</div>
+						{loading ? 'Adding Customer…' : 'Add Customer'}
+					</button>
+				</form>
 
-							<div class="form-control">
-								<label class="label pt-0" for="email"><span class="label-text font-bold">Business Email</span></label>
-								<label class="input input-bordered flex items-center gap-2 focus-within:outline-primary">
-									<Mail size={16} class="opacity-40" />
-									<input bind:value={email} name="email" type="email" placeholder="email@company.com" required class="w-full" />
-								</label>
-							</div>
-
-							<div class="form-control">
-								<label class="label pt-0" for="phone"><span class="label-text font-bold">Phone Number</span></label>
-								<label class="input input-bordered flex items-center gap-2 focus-within:outline-primary">
-									<Phone size={16} class="opacity-40" />
-									<input bind:value={phone} name="phone" type="tel" placeholder="+1..." class="w-full" />
-								</label>
-							</div>
-
-
-
-
-						</div>
-
-						<div class="card-actions justify-end mt-8">
-							<button type="submit" class="btn btn-primary btn-wide shadow-lg shadow-primary/30" disabled={disableSubmit}>
-								{#if loading}
-									<span class="loading loading-spinner"></span>
-								{:else}
-									Dispatch Inquiry <Send size={18} class="ml-2" />
-								{/if}
-							</button>
-						</div>
-					</form>
-
-                </div>
-            </div>
-        </div>
-
-        </div>
-
+			</div>
+		</div>
+	</div>
 </div>

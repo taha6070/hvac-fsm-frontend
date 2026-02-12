@@ -41,7 +41,7 @@ export const actions = {
       const token = responseData.token; 
 
       // 5. Set the Cookie (The "Standard" Security Practice)
-      cookies.set('session', token, {
+      cookies.set('access_token', token, {
         path: '/',
         httpOnly: true,
         sameSite: 'strict',
