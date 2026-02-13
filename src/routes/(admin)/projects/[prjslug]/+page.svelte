@@ -2,6 +2,7 @@
     import { ArrowLeft } from '@lucide/svelte';
     import { goto } from '$app/navigation';
   export let data;
+  import AnalyticsCard from '$lib/components/Analytics/AnalyticsCard.svelte';
 
   const { project } = data;
 </script>
@@ -12,6 +13,19 @@
 >
   <ArrowLeft />Go Back
 </button>
+<div class="mt-6"></div>
+  <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+  <AnalyticsCard title="Total Invoice" value={project.total_invoice} prefix="$" change={12.4} icon="💰" />
+  <AnalyticsCard title="Revenue" value={1823} change={8.1} icon="👥" />
+  <AnalyticsCard title="Payroll" value={312} change={-3.2} icon="📦" />
+</div>
+
+
+<div class="mt-8"></div>
+
+
+
+
   <!-- Jobs Section -->
   <div class="card bg-base-100 shadow-xl border border-base-300">
     <div class="card-body">
