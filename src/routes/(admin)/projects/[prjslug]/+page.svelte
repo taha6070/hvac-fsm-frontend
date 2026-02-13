@@ -1,10 +1,12 @@
 <script lang="ts">
     import { ArrowLeft } from '@lucide/svelte';
+    import { page } from '$app/state';
     import { goto } from '$app/navigation';
   export let data;
   import AnalyticsCard from '$lib/components/Analytics/AnalyticsCard.svelte';
 
   const { project } = data;
+  $:projectId=page.params.prjslug
 </script>
 
 <button
@@ -20,6 +22,13 @@
   <AnalyticsCard title="Payroll" value={312} change={-3.2} icon="📦" />
 </div>
 
+<div class="mt-5">
+<button class="btn btn-primary" on:click={() => goto(`/projects/${projectId}/jobs/create`)}>
+  Create Job
+</button>
+
+
+</div>
 
 <div class="mt-8"></div>
 
@@ -70,7 +79,7 @@
                 <td>{new Date(job.start_date).toLocaleString()}</td>
                 <td>{new Date(job.end_date).toLocaleString()}</td>
           <td>
-            <a href="/dashboard/job/{job.slug}">View Job</a>
+            <a href="job/{job.slug}">View Job</a>
           </td>
 
 

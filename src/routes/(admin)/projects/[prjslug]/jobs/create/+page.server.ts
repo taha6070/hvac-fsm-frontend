@@ -12,43 +12,40 @@ export const actions = {
   default: async ({ fetch, request }) => {
     const formData = await request.formData();
 
-    const title = formData.get('title')?.toString();
     const addresss = formData.get('address')?.toString();
 
     const status = formData.get('status')?.toString();
-    const service_type = formData.get('service_type')?.toString();
+    const project_id=formData.get("project_id")?.toString();
     
     const start_date = formData.get('start_date')?.toString();
     const end_date = formData.get('end_date')?.toString();
-    const total_invoice=formData.get('total_invoice')
-    const customer_id = formData.get('customer_id')?.toString();
+    const assigned_to = formData.get('employee_id')?.toString();
+    const job_type=formData.get("jobtype_id")?.toString();
 
     // ✅ Log incoming form data (this logs in your server terminal)
     console.log("Incoming Form Data:");
     console.log({
-      title,
 
-      customer_id
+      assigned_to
     });
 
     const cookieHeader = request.headers.get('cookie') || '';
 
     try {
       const payload = {
-        title,
+        project_id:Number(project_id),
         addresss,
-        service_type,
         status,
-        total_invoice:Number(total_invoice),
-        customer_id:Number(customer_id),
+        assigned_to:Number(assigned_to),
         start_date:toISO(start_date),
-        end_date:toISO(end_date)
+        end_date:toISO(end_date),
+        job_type:Number(job_type)
       };
 
       // ✅ Log payload before sending to backend
       console.log("Sending to Backend:", payload);
 
-      const response = await fetch('http://127.0.0.1:8000/api/v1/projects/', {
+      const response = await fetch('http://127.0.0.1:8000/api/v1/jobs', {
         method: 'POST',
         headers: {
           accept: 'application/json',
@@ -74,7 +71,7 @@ export const actions = {
 
       return {
         success: true,
-        message: data.detail || "Project Created successfully!"
+        message: data.detail || `Job   assigned  to  successfully!`
       };
 
     } catch (err) {
