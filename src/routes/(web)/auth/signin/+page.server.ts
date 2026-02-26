@@ -57,6 +57,6 @@ export const actions = {
 
     // 6. Redirect on Success
     // We redirect to the dashboard after a successful login
-    throw redirect(303, '/dashboard');
+    throw redirect(303, '/dashboard/projects');
   },
 } satisfies Actions;

@@ -2,11 +2,11 @@
   export let open = true;
 
   const menu = [
-    { name: 'Dashboard', href: '/', icon: 'dashboard' },
-    { name: 'Projects', href: '/projects', icon: 'folder' },
+    { name: 'Dashboard', href: '/dashboard/projects', icon: 'dashboard' },
+    { name: 'Projects', href: '/dashboard/projects', icon: 'folder' },
     { name: 'Jobs', href: '/jobs', icon: 'briefcase' },
-    { name: 'Employees', href: '/employees', icon: 'users' },
-    { name: 'Invoices', href: '/invoices', icon: 'receipt' },
+    { name: 'Employees', href: '/dashboard/employee', icon: 'users' },
+    { name: 'Pays', href: '/dashboard/pays', icon: 'receipt' },
     { name: 'Settings', href: '/settings', icon: 'settings' }
   ];
 

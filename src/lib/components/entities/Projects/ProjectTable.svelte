@@ -42,7 +42,7 @@
     <tbody>
       {#each jobs as job, i}
         <tr class="hover">
-          <td class="font-mono">{i + 1}</td>
+          <td class="font-mono">{job.id}</td>
 
           <td class="font-semibold">
             {job.title}

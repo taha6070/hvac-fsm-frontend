@@ -1,5 +1,6 @@
 import { fail } from "@sveltejs/kit";
 import type { Actions } from "./$types";
+import { API_URL } from "$env/static/private";
 
 
 function toISO(date: string) {
@@ -48,7 +49,7 @@ export const actions = {
       // ✅ Log payload before sending to backend
       console.log("Sending to Backend:", payload);
 
-      const response = await fetch('http://127.0.0.1:8000/api/v1/projects/', {
+      const response = await fetch(`${API_URL}/projects/`, {
         method: 'POST',
         headers: {
           accept: 'application/json',

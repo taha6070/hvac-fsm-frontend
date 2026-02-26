@@ -7,6 +7,30 @@
 
   const { project } = data;
   $:projectId=page.params.prjslug
+async function generatePays(projectId:string) {
+  try {
+    const response = await fetch(
+      `http://127.0.0.1:8000/api/v1/pays/generate?project_id=${Number(projectId)}`,
+      {
+        method: "POST",
+        headers: {
+          "Accept": "application/json",
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status} `);
+    }
+
+    const data = await response.json();
+    console.log("✅ Success:", data);
+    return data;
+
+  } catch (error) {
+    console.error("❌ Failed:", error);
+  }
+}
 </script>
 
 <button
@@ -22,9 +46,28 @@
   <AnalyticsCard title="Payroll" value={312} change={-3.2} icon="📦" />
 </div>
 
+
+
 <div class="mt-5">
+<button class="btn btn-primary" on:click={() => goto(`/projects/${projectId}/helperjobs/`)}>
+Technician Jobs
+</button>
+
 <button class="btn btn-primary" on:click={() => goto(`/projects/${projectId}/jobs/create`)}>
   Create Job
+</button>
+
+<button class="btn btn-primary" on:click={() => goto(`/projects/${projectId}/pays`)}>
+  Show Pays
+</button>
+
+<button class="btn btn-primary" on:click={() => goto(`/projects/${projectId}/fixed-pays`)}>
+  Show Fixed Pays
+</button>
+
+
+<button class="btn btn-primary" on:click={() => generatePays(projectId)}>
+  Generate Pay
 </button>
 
 

@@ -1,12 +1,21 @@
 <script>
-  let menuOpen = false;
+  let menuOpen = true;
+  import { goto } from '$app/navigation';
+
+	async function logout() {
+		await fetch('/api/logout', { method: 'POST' });
+		goto('/auth/signin');
+	}
 
   const links = [
-    { name: 'Home', href: '/dashboard' },
-    { name: 'Projects', href: '/projects' },
-    { name: 'Create Project', href: '/projects/create' },
-    { name: 'Jobs', href: '/dashboard/jobs' },
-    { name: 'Create Job', href: '/dashboard/jobs/create' },
+    { name: 'Home', href: '/dashboard/projects' },
+    { name: 'Projects', href: '/dashboard/projects' },
+    { name: 'Create Project', href: '/dashboard/projects/create' },
+    // { name: 'Jobs', href: '/dashboard/jobs' },
+    { name: 'Job Type', href: '/dashboard/jobtype' },
+    { name: 'Payroll', href: '/dashboard/payroll' },
+
+    { name: 'Pays', href: '/dashboard/pays' },
     { name: 'Employees', href: '/dashboard/employee' },
     { name: 'Add Employee', href: '/dashboard/employee/create' },
     { name: 'Contacts', href: '/dashboard/contacts' },
@@ -78,7 +87,10 @@
 
   <!-- Right: Quick Actions -->
   <div class="navbar-end hidden lg:flex gap-2">
-    <a href="/logout" class="btn btn-ghost rounded-full">Logout</a>
-    <a href="/settings" class="btn btn-primary rounded-full px-6">Settings</a>
+  <button class="btn btn-ghost rounded-full" on:click={logout}>
+	Logout
+  </button>
+    <!-- <a href="/logout" class="btn btn-ghost rounded-full">Logout</a> -->
+    <!-- <a href="/settings" class="btn btn-primary rounded-full px-6">Settings</a> -->
   </div>
 </nav>

@@ -1,7 +1,9 @@
 <script lang="ts">
     import ProjectTable from '$lib/components/entities/Projects/ProjectTable.svelte';
 export let data;
+import Pagination from '$lib/components/UI/Pagination/Pagination.svelte';
 import AnalyticsCard from '$lib/components/Analytics/AnalyticsCard.svelte';
+const { jobs, total, page, limit } = data;
 </script>
 
 <div class="p-6 space-y-6">
@@ -13,7 +15,11 @@ import AnalyticsCard from '$lib/components/Analytics/AnalyticsCard.svelte';
     </button>
   </div>
 
+  
+
 
 
   <ProjectTable jobs={data.jobs} />
+   <Pagination {total} {page} {limit} />
+
 </div>

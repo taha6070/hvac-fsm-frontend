@@ -1,8 +1,15 @@
 <script lang="ts">
   export let data;
+  import MarkDoneButton from '$lib/components/Technician/MarkDoneButton.svelte';
+  import { page } from '$app/state';
   
+  $:jobId=page.params.jbid;
   // Destructure for easier access
   $: ({ job, job_type, employee, project, client } = data.details);
+   
+    function handleUpdated(event) {
+    console.log("Updated job:", event.detail);
+  }
 
   function formatDate(dateString: string) {
     if (!dateString) return 'N/A';
@@ -24,10 +31,14 @@
       <p class="text-gray-500 font-mono">Job ID: {job.slug}</p>
     </div>
     <span class="mt-4 md:mt-0 inline-flex items-center px-4 py-2 bg-green-100 text-green-700 text-sm font-semibold rounded-full uppercase tracking-wide">
-      {job.status}
+      {job.status} 
     </span>
   </div>
 
+<MarkDoneButton 
+  jobId={jobId}
+  on:updated={handleUpdated}
+/>
   <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
     <div class="lg:col-span-2 space-y-6">

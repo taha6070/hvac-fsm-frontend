@@ -36,7 +36,7 @@
             <tr class="hover">
               <td>
                 <div class="font-bold">{job.project}</div>
-                <div class="text-xs opacity-50">{job.slug}</div>
+                <!-- <div class="text-xs opacity-50">{job.slug}</div> -->
               </td>
               <td>{job.job_type}</td>
               <td>

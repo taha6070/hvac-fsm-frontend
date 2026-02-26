@@ -5,19 +5,20 @@
 
   const { jobtype } = data;
 </script>
-
-<button
-  class="btn btn-ghost gap-2 "
-  on:click={() => goto('/projects')}
->
-  <ArrowLeft />Go Back
+<div class="flex">
+<div class="mt-4"></div>
+<button class="btn btn-primary" on:click={() => goto(`/dashboard/jobtype/create`)}>
+  Create JobType
 </button>
-  <!-- Jobs Section -->
+</div>
+<div class="mt-2.5"></div>
+
+<!-- Jobs Section -->
   <div class="card bg-base-100 shadow-xl border border-base-300">
     <div class="card-body">
 
       <div class="flex justify-between items-center">
-        <h2 class="text-xl font-bold">Assigned Jobs</h2>
+        <h2 class="text-xl font-bold">Job Type</h2>
         <span class="badge badge-info">{jobtype.length} Jobs</span>
       </div>
 
@@ -30,6 +31,7 @@
               <th>description</th>
               <th>created at</th>
               <th>updated at</th>
+              <th>Edit</th>
             </tr>
           </thead>
 
@@ -43,9 +45,9 @@
                 </td>
 
                 <td>{new Date(job.created_at).toLocaleString()}</td>
-                <td>{new Date(job.updated_at).toLocaleString()}</td>
+                <td>{new Date(job.update_at).toLocaleString()}</td>
           <td>
-            <a href="/dashboard/job/{job.slug}">View Job</a>
+            <a href="/dashboard/job/{job.slug}">Edit</a>
           </td>
 
 

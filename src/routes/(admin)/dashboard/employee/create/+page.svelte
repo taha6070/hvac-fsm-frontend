@@ -79,6 +79,8 @@
     <option value="" disabled selected hidden>Choose Role</option>
     <option value="technician">Technician</option>
     <option value="admin">Admin</option>
+    <option value="helper">Fixed Technician</option>
+
 </select>
 
 
