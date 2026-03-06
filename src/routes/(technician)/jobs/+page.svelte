@@ -4,6 +4,23 @@
 
   export let data;
 
+  const filters = [
+    { label: 'Today', value: 'today' },
+    { label: '3D', value: '3d' },
+    { label: '5D', value: '5d' },
+    { label: '7D', value: '7d' },
+    { label: '14D', value: '14d' },
+    { label: 'Month', value: 'month' },
+    { label: 'All', value:''}
+  ];
+  function applyFilter(filterValue: string) {
+    const url = new URL(window.location.href);
+    url.searchParams.set('date_filter', filterValue);
+    url.searchParams.set('page', '1'); // Reset to page 1 on new filter
+    goto(url.toString(), { keepFocus: true, noScroll: true });
+  }
+
+
   // Reactive calculations
   $: totalPages = Math.ceil(data.totalCount / data.limit);
   $: currentPage = data.currentPage;
@@ -18,6 +35,34 @@
     goto(url.toString(), { keepFocus: true, noScroll: true });
   }
 </script>
+<!-- filter on Today -->
+
+<div class="flex flex-wrap gap-2 p-4 bg-white rounded-xl shadow w-fit mb-6">
+  {#each filters as filter}
+    <button
+      class="px-4 py-2 text-sm font-medium rounded-full transition-all"
+      class:bg-blue-600={data.activeFilter === filter.value}
+      class:text-white={data.activeFilter === filter.value}
+      class:bg-gray-100={data.activeFilter !== filter.value}
+      class:text-gray-700={data.activeFilter !== filter.value}
+      class:hover:bg-blue-100={data.activeFilter !== filter.value}
+      class:hover:text-blue-700={data.activeFilter !== filter.value}
+      on:click={() => applyFilter(filter.value)}
+    >
+      {filter.label}
+    </button>
+  {/each}
+</div>
+
+<div class="card bg-base-100 shadow border border-base-300">
+  <div class="card-body">
+    <h2 class="card-title">Jobs ({data.totalCount})</h2>
+    </div>
+</div>
+
+
+
+
 
 <div class="p-6">
 
@@ -31,6 +76,7 @@
               <th>Project</th>
               <th>Type</th>
               <th>Status</th>
+              <th>Start Date</th>
               <th class="text-right">Actions</th>
             </tr>
           </thead>
@@ -47,6 +93,15 @@
                 <td>
                   <span class="badge badge-sm">{job.status}</span>
                 </td>
+
+                <td>
+          <span class="badge badge-sm">
+  {new Date(job.start_date).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  })}
+</span>                </td>
 
                 <td class="text-right">
                   <button
@@ -87,6 +142,13 @@
             <span class="badge badge-sm">{job.status}</span>
           </div>
 
+                    <span class="badge badge-sm">
+  {new Date(job.start_date).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  })}
+</span>
           <div class="card-actions justify-end mt-3">
             <button
               class="btn btn-primary btn-xs"
