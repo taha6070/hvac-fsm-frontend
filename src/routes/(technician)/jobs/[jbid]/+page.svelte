@@ -2,6 +2,8 @@
   export let data;
   import MarkDoneButton from '$lib/components/Technician/MarkDoneButton.svelte';
   import { page } from '$app/state';
+  import { goto } from '$app/navigation';
+  import { ArrowLeft } from '@lucide/svelte';
   
   $:jobId=page.params.jbid;
   // Destructure for easier access
@@ -39,6 +41,13 @@
   jobId={jobId}
   on:updated={handleUpdated}
 />
+<button
+  class="btn btn-primary btn-sm gap-2"
+  on:click={() => goto(`/jobs/${jobId}/products`)}
+>
+  Add Products
+</button>
+
   <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
     <div class="lg:col-span-2 space-y-6">

@@ -1,5 +1,5 @@
 <script>
-  let menuOpen = false;
+  let menuOpen = true;
 	import { goto } from '$app/navigation';
 
 	async function logout() {
