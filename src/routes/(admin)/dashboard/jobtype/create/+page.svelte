@@ -30,10 +30,11 @@
 				>
 					<!-- GHL ID -->
 					<div class="form-control">
-						<label class="label">
+						<label class="label" for="title">
 							<span class="label-text font-medium">Title</span>
 						</label>
 						<input
+							id="title"
 							type="text"
 							class="input input-bordered w-full"
 							placeholder="80 to 80 systems"
@@ -45,10 +46,11 @@
 
 					<!-- Name -->
 					<div class="form-control">
-						<label class="label">
+						<label class="label" for="description">
 							<span class="label-text font-medium">description</span>
 						</label>
 						<input
+							id="description"
 							type="text"
 							class="input input-bordered w-full"
 							placeholder="Ac Installtions for the system"

@@ -32,6 +32,7 @@
               <th>created at</th>
               <th>updated at</th>
               <th>Edit</th>
+
             </tr>
           </thead>
 
@@ -47,7 +48,7 @@
                 <td>{new Date(job.created_at).toLocaleString()}</td>
                 <td>{new Date(job.update_at).toLocaleString()}</td>
           <td>
-            <a href="/dashboard/job/{job.slug}">Edit</a>
+          <button class="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 transition-colors duration-200">Delete</button>
           </td>
 
 
