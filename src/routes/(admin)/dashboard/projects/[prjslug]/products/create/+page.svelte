@@ -3,7 +3,12 @@
   import { createEnhanceHook } from '$lib/hooks/createEnhnaceHook';
   import { enhance } from '$app/forms';
 
-  let pr
+  let status = '';
+  let address = '';
+  let start_date = '';
+  let end_date = '';
+  let employee_id = '';
+  let jobtype_id = '';
 
   let projectID=page.params.prjslug;
 
@@ -84,11 +89,12 @@
 
 					<!-- Address -->
 					<div class="form-control">
-						<label class="label">
+						<label class="label" for="address">
 							<span class="label-text font-medium">Address</span>
 						</label>
 						<input
 							type="text"
+							id="address"
 							class="input input-bordered w-full"
 							placeholder="123 Main St, New York"
 							bind:value={address}
