@@ -1,17 +1,16 @@
-import type { PageLoad } from './$types';
-import { API_URL } from '$env/static/private';
-export const load: PageLoad = async ({ fetch, url }) => {
+import type { PageServerLoad } from './$types';
+export const load: PageServerLoad = async ({ fetch, url }) => {
     // 1. Extract query params from the current page URL
     // Default to page 1 and limit 10 if not present
     const page = url.searchParams.get('page') || '1';
-    const limit = url.searchParams.get('limit') || '10';
+    const limit = url.searchParams.get('limit') || '100';
     const jobtype = url.searchParams.get('jobtype') || '';
 
     // 2. Construct the backend API URL
-    const apiUrl = new URL(`${API_URL}/payrolls`);
+    const apiUrl = new URL(`http://127.0.0.1:8000/api/v1/payrolls`);
     apiUrl.searchParams.set('page', page);
     apiUrl.searchParams.set('limit', limit);
-    
+
     // Only append jobtype if the user actually typed something
     if (jobtype) {
         apiUrl.searchParams.set('jobtype', jobtype);

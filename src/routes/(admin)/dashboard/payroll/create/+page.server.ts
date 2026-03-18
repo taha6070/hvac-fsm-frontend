@@ -8,8 +8,8 @@ export const actions = {
     const emp_id = formData.get('employee_id')?.toString();
     const job_type = formData.get('jobtype_id')?.toString();
     const amount = formData.get('amount')?.toString();
-
-
+    const helper_deduction = formData.get('helper_deduction');
+    const commission = formData.get('commission');
 
     // ✅ Log incoming form data (this logs in your server terminal)
     console.log("Incoming Form Data:");
@@ -17,18 +17,19 @@ export const actions = {
         emp_id,
         job_type,
         amount,
-
+        helper_deduction,
+        commission
     });
 
     const cookieHeader = request.headers.get('cookie') || '';
 
     try {
       const payload = {
-        emp_id:Number(emp_id),
-        job_type:Number(job_type),
-        amount:Number(amount),
-        deduct_helper: true,
-
+        emp_id: Number(emp_id),
+        job_type: Number(job_type),
+        amount: Number(amount),
+        deduct_helper: helper_deduction,
+        commission: commission
       };
 
       // ✅ Log payload before sending to backend
