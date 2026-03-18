@@ -7,7 +7,7 @@
     { name: 'Jobs', href: '/jobs', icon: 'briefcase' },
     { name: 'Employees', href: '/dashboard/employee', icon: 'users' },
     { name: 'Pays', href: '/dashboard/pays', icon: 'receipt' },
-    { name: 'Settings', href: '/settings', icon: 'settings' }
+    { name: 'Settings', href: '/dashboard/settings', icon: 'settings' }
   ];
 
   const icons = {
