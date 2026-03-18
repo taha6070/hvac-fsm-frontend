@@ -29,6 +29,12 @@
 
 <div class="p-6">
   <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
+<button class="btn btn-primary" on:click={() => goto(`/dashboard/pays/technician`)}>
+Payroll by month
+</button>
+<button class="btn btn-primary" on:click={() => goto(`/dashboard/pays/week`)}>
+Payroll by week
+</button>
     <h1 class="text-2xl font-bold">Total Pays</h1>
     
     <div class="join w-full max-w-md">
@@ -54,13 +60,14 @@
             <th>Employee</th>
             <th>Calculated</th>
             <th>Total Amount</th>
-            <th>Paid</th>
             <th>Due Date</th>
             <th>Created At</th>
+            <th>Paid</th>
+
           </tr>
         </thead>
         <tbody>
-          {#each data.pays as pay}
+          {#each data.response as pay}
             <tr>
               <td class="font-mono text-xs">{pay.id}</td>
               <td class="font-semibold">{pay.employee}</td>
@@ -68,15 +75,16 @@
               <td>
                 <span class="text-amber-900" >{pay.total_amount ? `$${pay.total_amount}` : '—'}</span>
               </td>
+              
+              <td>{formatDate(pay.due_date)}</td>
+              <td class="text-xs opacity-70">{formatDate(pay.created_at)}</td>
               <td>
-                {#if pay.amount_paid}
-                  <span class="badge badge-success text-white">${pay.amount_paid}</span>
+                {#if pay.status}
+                  <span class="badge badge-success text-white">{pay.status}</span>
                 {:else}
                   <span class="badge badge-ghost opacity-50">Unpaid</span>
                 {/if}
               </td>
-              <td>{formatDate(pay.due_date)}</td>
-              <td class="text-xs opacity-70">{formatDate(pay.created_at)}</td>
             </tr>
           {:else}
             <tr>
