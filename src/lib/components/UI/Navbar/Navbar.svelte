@@ -28,8 +28,9 @@
   <div class="navbar-start">
     <!-- Mobile Hamburger -->
     <div class="dropdown lg:hidden">
-      <label
-        tabindex="0"
+      <button
+        type="button"
+        aria-label="Toggle menu"
         class="btn btn-ghost btn-circle"
         on:click={() => (menuOpen = !menuOpen)}
       >
@@ -47,11 +48,10 @@
             d="M4 6h16M4 12h16M4 18h16"
           />
         </svg>
-      </label>
+      </button>
 
       {#if menuOpen}
         <ul
-          tabindex="0"
           class="menu menu-sm dropdown-content mt-3 z-[1] w-60 rounded-box bg-base-100 shadow-lg p-2"
         >
           {#each links as link}

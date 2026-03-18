@@ -3,7 +3,7 @@
     import Navbar from '$lib/components/UI/Navbar/Navbar.svelte';
     import Sidebar from '$lib/components/UI/Sidebar/Sidebar.svelte';
     import { Toaster } from "svelte-sonner";
-    let sidebarOpen = false;
+    let sidebarOpen = $state(false);
     let { children } = $props();
 </script>
 
