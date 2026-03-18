@@ -1,17 +1,32 @@
 import type { PageLoad } from './$types';
 
-export const load: PageLoad = async ({ params,fetch, url }) => {
-    // Get prj_id from URL, default to 1 if not present
-    const prjId =params.prjslug;
+export const load: PageLoad = async ({ params, fetch, url }) => {
+    const prjId = params.prjslug;
     const page = url.searchParams.get('page') || '1';
 
-    const apiUrl = `http://127.0.0.1:8000/api/v1/pays?page=${page}&limit=10&prj_id=${prjId}`;
+    // Construct both URLs
+    const standardPaysUrl = `http://127.0.0.1:8000/api/v1/pays?page=${page}&limit=20&prj_id=${prjId}`;
+    const helperPaysUrl = `http://127.0.0.1:8000/api/v1/helper/pays?page=${page}&limit=20&prj_id=${prjId}`;
+    const contractorPaysUrl = `http://127.0.0.1:8000/api/v1/contractor/pays?page=${page}&limit=20&prj_id=${prjId}`;
+    
 
-    const response = await fetch(apiUrl);
-    const data = await response.json();
+    // Fetch both simultaneously
+    const [standardRes, helperRes, contractRes] = await Promise.all([
+        fetch(standardPaysUrl),
+        fetch(helperPaysUrl),
+        fetch(contractorPaysUrl)
+    ]);
+
+    const standardData = await standardRes.json();
+    const helperData = await helperRes.json();
+    const contractData=await contractRes.json()
 
     return {
-        pays: Array.isArray(data) ? data : [],
-        prjId
+        standardPays: Array.isArray(standardData) ? standardData : (standardData.response || []),
+        helperPays: Array.isArray(helperData) ? helperData : (helperData.response || []),
+        contractorPays: Array.isArray(contractData) ? contractData : (contractData.response || []),
+
+        prjId,
+        currentPage: parseInt(page)
     };
 };

@@ -15,10 +15,18 @@
         method: "POST",
         headers: { "Accept": "application/json" }
       });
-      if (!response.ok) throw new Error(`Error: ${response.status}`);
+      
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        const errorMessage = errorData.detail || `Error: ${response.status}`;
+        throw new Error(errorMessage);
+      }
+      
       alert("Payroll generated successfully!");
     } catch (err) {
       console.error("❌ Failed:", err);
+      // alert the user with the detailed error message
+      alert(err.message || "Failed to generate pays");
     }
   }
 </script>

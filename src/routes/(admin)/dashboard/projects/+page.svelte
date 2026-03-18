@@ -21,6 +21,27 @@
   function formatCurrency(val: number) {
     return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(val);
   }
+async function deleteProject(id:Number) {
+    if (!confirm("Are you sure you want to delete this project?")) return;
+
+    try {
+      const res = await fetch(`http://127.0.0.1:8000/api/v1/projects/a/${id}`, {
+        method: "DELETE",
+        headers: {
+          "accept": "*/*"
+        }
+      });
+
+      if (!res.ok) {
+        throw new Error("Delete failed");
+      }
+      window.location.reload();
+
+      console.log("Project deleted");
+    } catch (err) {
+      console.error(err);
+    }
+  }
 </script>
 
 <div class="p-6 max-w-7xl mx-auto">
@@ -50,6 +71,7 @@
             <th>Status</th>
             <th>Address</th>
             <th class="text-right">Action</th>
+            <th>delete</th>
           </tr>
         </thead>
         <tbody>
@@ -74,6 +96,14 @@
               <td class="text-sm">{project.addresss}</td>
               <td class="text-right">
                 <a href="/dashboard/projects/{project.id}" class="btn btn-ghost btn-xs">View</a>
+              </td>
+              <td>
+<button
+  class="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 transition-colors duration-200"
+  on:click={() => deleteProject(project.id)}
+>
+  Delete
+</button>
               </td>
             </tr>
           {:else}

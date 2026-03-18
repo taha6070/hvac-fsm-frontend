@@ -21,7 +21,7 @@
 
 
 <div class="mt-5">
-<button class="btn btn-primary" on:click={() => goto(`/dashbaord/projects/${projectId}/helperjobs/create`)}>
+<button class="btn btn-primary" on:click={() => goto(`/dashboard/projects/${projectId}/helperjobs/create`)}>
     Create Technician Jobs
 </button>
 </div>
