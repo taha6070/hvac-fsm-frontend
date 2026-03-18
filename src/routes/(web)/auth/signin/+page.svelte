@@ -3,6 +3,7 @@
   import { createEnhanceHook } from '$lib/hooks/createEnhnaceHook';
   import { enhance } from '$app/forms';
   import { PUBLIC_APP_NAME } from '$env/static/public';
+  import login from '$lib/assets/icons/login.png';
 
 	let email = $state('');
 	let password = $state('');
@@ -130,7 +131,7 @@
         </form>
 				<div class="hidden items-center justify-center bg-base-300 md:flex">
 					<div class="rounded-full border-6 border-base-300 p-6">
-						<Image class="h-16 w-16 text-primary" />
+						<img  src="{login}" alt="Login">
 					</div>
 				</div>
 			</div>
