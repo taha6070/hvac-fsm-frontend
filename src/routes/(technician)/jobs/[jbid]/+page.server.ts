@@ -1,10 +1,9 @@
-import { error } from '@sveltejs/kit';
-import type { PageServerLoad } from './$types';
+import { error, fail } from '@sveltejs/kit';
+import type { PageServerLoad, Actions } from './$types';
 
 export const load: PageServerLoad = async ({ fetch, params, request }) => {
     const cookieHeader = request.headers.get('cookie') || '';
     
-    // Using the slug from the URL parameters
     const response = await fetch(`http://127.0.0.1:8000/api/v1/jobs/${params.jbid}`, {
         headers: {
             'accept': 'application/json',
@@ -18,4 +17,34 @@ export const load: PageServerLoad = async ({ fetch, params, request }) => {
 
     const data = await response.json();
     return { details: data };
+};
+
+export const actions: Actions = {
+    markDone: async ({ fetch, params, request }) => {
+        const cookieHeader = request.headers.get('cookie') || '';
+
+        try {
+            const response = await fetch(`http://127.0.0.1:8000/api/v1/jobs/technican/${params.jbid}`, {
+                method: 'PATCH',
+                headers: {
+                    'accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'cookie': cookieHeader
+                },
+                body: JSON.stringify({ status: 'done' })
+            });
+
+            if (!response.ok) {
+                const data = await response.json().catch(() => ({}));
+                return fail(response.status, { 
+                    message: data.detail || "Failed to update job status." 
+                });
+            }
+
+            return { success: true, message: "Job completed successfully!" };
+
+        } catch (err) {
+            return fail(500, { message: "Internal server error." });
+        }
+    }
 };
