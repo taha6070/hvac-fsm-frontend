@@ -130,8 +130,9 @@
   {#if employee.length}
     <div class="absolute z-10 bg-base-100 shadow-lg rounded-xl w-full mt-2 border">
       {#each employee as e}
-        <div
-          class="p-3 hover:bg-base-200 cursor-pointer"
+        <button
+          type="button"
+          class="p-3 hover:bg-base-200 cursor-pointer w-full text-left block"
           on:click={() => {
             employee_id = e.id;
             employeeSearch = e.name;
@@ -140,7 +141,7 @@
         >
           <p class="font-medium">{e.name}</p>
           <p class="text-sm opacity-60">{e.email}</p>
-        </div>
+        </button>
       {/each}
     </div>
   {/if}
@@ -162,8 +163,9 @@
   {#if jobtype.length}
     <div class="absolute z-10 bg-base-100 shadow-lg rounded-xl w-full mt-2 border">
       {#each jobtype as j}
-        <div
-          class="p-3 hover:bg-base-200 cursor-pointer"
+        <button
+          type="button"
+          class="p-3 hover:bg-base-200 cursor-pointer w-full text-left block"
           on:click={() => {
             jobtype_id = j.id;
             jobtypeSearch = j.title;
@@ -172,7 +174,7 @@
         >
           <p class="font-medium">{j.title}</p>
           <!-- <p class="text-sm opacity-60">{e.email}</p> -->
-        </div>
+        </button>
       {/each}
     </div>
   {/if}

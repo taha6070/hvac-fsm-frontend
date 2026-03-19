@@ -32,11 +32,12 @@
 				>
 					<!-- GHL ID -->
 					<div class="form-control">
-						<label class="label">
+						<label class="label" for="ghl_id">
 							<span class="label-text font-medium">GHL ID</span>
 						</label>
 						<input
 							type="text"
+							id="ghl_id"
 							class="input input-bordered w-full"
 							placeholder="GHL12345"
 							bind:value={ghl_id}
@@ -47,11 +48,12 @@
 
 					<!-- Name -->
 					<div class="form-control">
-						<label class="label">
+						<label class="label" for="name">
 							<span class="label-text font-medium">Name</span>
 						</label>
 						<input
 							type="text"
+							id="name"
 							class="input input-bordered w-full"
 							placeholder="John Doe"
 							bind:value={name}
@@ -62,11 +64,12 @@
 
 					<!-- Email -->
 					<div class="form-control">
-						<label class="label">
+						<label class="label" for="email">
 							<span class="label-text font-medium">Email</span>
 						</label>
 						<input
 							type="email"
+							id="email"
 							class="input input-bordered w-full"
 							placeholder="john@gmail.com"
 							bind:value={email}
@@ -77,11 +80,12 @@
 
 					<!-- Phone -->
 					<div class="form-control">
-						<label class="label">
+						<label class="label" for="phone_no">
 							<span class="label-text font-medium">Phone Number</span>
 						</label>
 						<input
 							type="text"
+							id="phone_no"
 							class="input input-bordered w-full"
 							placeholder="+1 234 567 890"
 							bind:value={phone_no}
@@ -92,11 +96,12 @@
 
 					<!-- Address -->
 					<div class="form-control">
-						<label class="label">
+						<label class="label" for="address">
 							<span class="label-text font-medium">Address</span>
 						</label>
 						<input
 							type="text"
+							id="address"
 							class="input input-bordered w-full"
 							placeholder="123 Main St, New York"
 							bind:value={address}

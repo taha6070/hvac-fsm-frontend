@@ -81,7 +81,7 @@
 
             <!-- Employee Search -->
             <div class="mt-6">
-                <label class="label">
+                <label class="label" for="employee_name">
                     <span class="label-text font-semibold">
                         Search Employee
                     </span>
@@ -90,6 +90,7 @@
                 <div class="flex gap-2">
                     <input
                         type="text"
+                        id="employee_name"
                         placeholder="Enter employee name..."
                         class="input input-bordered w-full"
                         bind:value={employee_name}
@@ -113,8 +114,9 @@
                 {#if employees.length > 0}
                     <div class="mt-3 bg-base-200 rounded-lg p-2 max-h-48 overflow-y-auto border">
                         {#each employees as emp}
-                            <div
-                                class="p-3 hover:bg-base-300 rounded cursor-pointer transition"
+                            <button
+                                type="button"
+                                class="p-3 hover:bg-base-300 rounded cursor-pointer transition w-full text-left block"
                                 on:click={() => {
                                     employee_id = emp.id;
                                     employee_name = emp.name;
@@ -125,7 +127,7 @@
                                 <p class="text-xs opacity-60">
                                     {emp.emp_id}
                                 </p>
-                            </div>
+                            </button>
                         {/each}
                     </div>
                 {/if}
@@ -135,12 +137,13 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
 
                 <div class="form-control">
-                    <label class="label">
+                    <label class="label" for="month">
                         <span class="label-text font-semibold">
                             Select Month
                         </span>
                     </label>
                     <select
+                        id="month"
                         class="select select-bordered w-full"
                         bind:value={month}
                     >
@@ -153,12 +156,13 @@
                 </div>
 
                 <div class="form-control">
-                    <label class="label">
+                    <label class="label" for="year">
                         <span class="label-text font-semibold">
                             Select Year
                         </span>
                     </label>
                     <select
+                        id="year"
                         class="select select-bordered w-full"
                         bind:value={year}
                     >

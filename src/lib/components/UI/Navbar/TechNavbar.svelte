@@ -19,10 +19,12 @@
   <div class="navbar-start">
     <!-- Mobile Hamburger -->
     <div class="dropdown lg:hidden">
-      <label
+      <div
+        role="button"
         tabindex="0"
         class="btn btn-ghost btn-circle"
         on:click={() => (menuOpen = !menuOpen)}
+        on:keydown={(e) => e.key === 'Enter' && (menuOpen = !menuOpen)}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -38,9 +40,10 @@
             d="M4 6h16M4 12h16M4 18h16"
           />
         </svg>
-      </label>
+      </div>
 
       {#if menuOpen}
+        <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
         <ul
           tabindex="0"
           class="menu menu-sm dropdown-content mt-3 z-[1] w-60 rounded-box bg-base-100 shadow-lg p-2"

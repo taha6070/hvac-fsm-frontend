@@ -54,11 +54,12 @@
 				>
 					<!-- GHL ID -->
 					<div class="form-control">
-						<label class="label">
+						<label class="label" for="title">
 							<span class="label-text font-medium">title</span>
 						</label>
 						<input
 							type="text"
+							id="title"
 							class="input input-bordered w-full"
 							placeholder="Name of the Customer"
 							bind:value={title}
@@ -85,11 +86,12 @@
 
 					<!-- Total Invoice -->
 					<div class="form-control">
-						<label class="label">
+						<label class="label" for="total_invoice">
 							<span class="label-text font-medium">Total Invoice</span>
 						</label>
 						<input
 							type="text"
+							id="total_invoice"
 							class="input input-bordered w-full"
 							placeholder="1500 DONOT ADD ANY $ sign It will break the system"
 							bind:value={total_invoice}
@@ -100,11 +102,12 @@
 
 					<!-- Address -->
 					<div class="form-control">
-						<label class="label">
+						<label class="label" for="address">
 							<span class="label-text font-medium">Address</span>
 						</label>
 						<input
 							type="text"
+							id="address"
 							class="input input-bordered w-full"
 							placeholder="123 Main St, New York"
 							bind:value={address}
@@ -146,8 +149,9 @@
   {#if customers.length}
     <div class="absolute z-10 bg-base-100 shadow-lg rounded-xl w-full mt-2 border">
       {#each customers as c}
-        <div
-          class="p-3 hover:bg-base-200 cursor-pointer"
+        <button
+          type="button"
+          class="p-3 hover:bg-base-200 cursor-pointer w-full text-left block"
           on:click={() => {
             customer_id = c.id;
             customerSearch = c.name;
@@ -156,7 +160,7 @@
         >
           <p class="font-medium">{c.name}</p>
           <p class="text-sm opacity-60">{c.email}</p>
-        </div>
+        </button>
       {/each}
     </div>
   {/if}

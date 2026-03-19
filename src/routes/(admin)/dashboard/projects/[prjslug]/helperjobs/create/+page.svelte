@@ -73,7 +73,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <!-- Status -->
           <div class="form-control w-full">
-            <label class="label">
+            <label class="label" for="status">
               <span class="label-text font-medium text-base-content/80">Status <span class="text-error">*</span></span>
             </label>
             <select bind:value={status} id="status" name="status" class="select select-bordered w-full focus:select-primary transition-all" required>
@@ -86,14 +86,14 @@
 
           <!-- Address -->
           <div class="form-control w-full">
-            <label class="label">
+            <label class="label" for="address">
               <span class="label-text font-medium text-base-content/80">Address <span class="text-error">*</span></span>
             </label>
             <div class="relative">
               <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-base-content/50">
                 <MapPin class="h-5 w-5" />
               </div>
-              <input type="text" class="input input-bordered w-full pl-10 focus:input-primary transition-all" placeholder="123 Main St, City, State" bind:value={address} name="address" required />
+              <input type="text" id="address" class="input input-bordered w-full pl-10 focus:input-primary transition-all" placeholder="123 Main St, City, State" bind:value={address} name="address" required />
             </div>
           </div>
         </div>
@@ -101,31 +101,31 @@
         <!-- Service Dates -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div class="form-control w-full">
-            <label class="label">
+            <label class="label" for="start_date">
               <span class="label-text font-medium text-base-content/80">Start Date <span class="text-error">*</span></span>
             </label>
             <div class="relative">
               <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-base-content/50">
                 <Calendar class="h-5 w-5" />
               </div>
-              <input type="datetime-local" name="start_date" class="input input-bordered w-full pl-10 focus:input-primary transition-all" bind:value={start_date} required />
+              <input type="datetime-local" id="start_date" name="start_date" class="input input-bordered w-full pl-10 focus:input-primary transition-all" bind:value={start_date} required />
             </div>
             {#if !start_date && typeof window !== 'undefined'}
-              <label class="label p-0 mt-1">
+              <div class="label p-0 mt-1">
                 <span class="label-text-alt text-error font-medium">Start date is required</span>
-              </label>
+              </div>
             {/if}
           </div>
 
           <div class="form-control w-full">
-            <label class="label">
+            <label class="label" for="end_date">
               <span class="label-text font-medium text-base-content/80">End Date</span>
             </label>
             <div class="relative">
               <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-base-content/50">
                 <Calendar class="h-5 w-5 text-base-content/40" />
               </div>
-              <input type="datetime-local" name="end_date" class="input input-bordered w-full pl-10 focus:input-primary transition-all" bind:value={end_date} />
+              <input type="datetime-local" id="end_date" name="end_date" class="input input-bordered w-full pl-10 focus:input-primary transition-all" bind:value={end_date} />
             </div>
           </div>
         </div>
@@ -135,14 +135,14 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <!-- Job Type Search -->
           <div class="form-control w-full relative">
-            <label class="label">
+            <label class="label" for="jobtype">
               <span class="label-text font-medium text-base-content/80">Job Type</span>
             </label>
             <div class="relative">
               <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-base-content/50">
                 <Briefcase class="h-5 w-5" />
               </div>
-              <input class="input input-bordered w-full pl-10 focus:input-primary transition-all" placeholder="Search Job Type..." bind:value={jobtypeSearch} on:input={(e) => searchJobType(e.currentTarget.value)} />
+              <input id="jobtype" class="input input-bordered w-full pl-10 focus:input-primary transition-all" placeholder="Search Job Type..." bind:value={jobtypeSearch} on:input={(e) => searchJobType(e.currentTarget.value)} />
             </div>
             
             {#if jobtype.length}
@@ -162,14 +162,14 @@
 
           <!-- Employee Search -->
           <div class="form-control w-full relative">
-            <label class="label">
+            <label class="label" for="employee_search">
               <span class="label-text font-medium text-base-content/80">Technician/Helper</span>
             </label>
             <div class="relative">
               <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-base-content/50">
                 <User class="h-5 w-5" />
               </div>
-              <input class="input input-bordered w-full pl-10 focus:input-primary transition-all" placeholder="Search employee..." bind:value={employeeSearch} on:input={(e) => searchEmployee(e.currentTarget.value)} />
+              <input id="employee_search" class="input input-bordered w-full pl-10 focus:input-primary transition-all" placeholder="Search employee..." bind:value={employeeSearch} on:input={(e) => searchEmployee(e.currentTarget.value)} />
             </div>
 
             {#if employee.length}

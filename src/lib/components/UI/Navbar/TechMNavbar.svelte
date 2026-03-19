@@ -54,7 +54,7 @@
 	{/each}
 
 	<div class="dropdown dropdown-top dropdown-end flex items-center text-gray-500">
-		<label tabindex="0" class="flex items-center gap-1 cursor-pointer">
+		<div role="button" tabindex="0" class="flex items-center gap-1 cursor-pointer">
 			<svg
 				class="h-5 w-5"
 				fill="none"
@@ -71,8 +71,9 @@
 			</svg>
 
 			<span class="text-xs font-medium">More</span>
-		</label>
+		</div>
 
+		<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
 		<ul
 			tabindex="0"
 			class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 mb-2 border border-base-300"
@@ -84,10 +85,3 @@
 </footer>
 
 <div class="lg:hidden h-16"></div>
-
-<style>
-    /* Styling for the active btm-nav link */
-	.btm-nav a.active {
-		background-color: transparent;
-	}
-</style>
