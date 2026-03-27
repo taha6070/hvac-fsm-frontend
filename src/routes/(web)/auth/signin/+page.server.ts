@@ -38,13 +38,14 @@ export const actions = {
 
       // 4. Handle Successful Login
       const responseData = await res.json();
-      const token = responseData.token; 
+      const token = responseData.token;
 
       // 5. Set the Cookie (The "Standard" Security Practice)
+      console.log(token);
       cookies.set('access_token', token, {
         path: '/',
         httpOnly: true,
-        sameSite: 'strict',
+        sameSite: 'none',
         maxAge: 60 * 60 * 24 // 1 day
       });
 
