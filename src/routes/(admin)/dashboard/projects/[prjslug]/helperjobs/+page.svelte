@@ -74,7 +74,7 @@
                  <td>10/20/2025</td>
           <td>
             <!-- <a href="job/{job.}">View Job</a> -->
-             <a href="javascript:void(0)">edit</a>
+             <a href="/dashboard/projects/{projectId}/helperjobs/{job.id}">edit</a>
           </td>
 
 

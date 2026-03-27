@@ -27,6 +27,9 @@ export const load: PageServerLoad = async ({ fetch, url }) => {
 
     return {
         pays: Array.isArray(pays) ? pays : [],
+        totalCount: pays.count || 0,
+        totalPages: pays.total_pages || 1,
+        currentPage: parseInt(page),
 
         response: pays.response,
         searchQuery: employee

@@ -66,6 +66,7 @@
       }
 
       alert("Status updated to paid");
+      window.location.reload()
     } catch (error) {
       console.error("Error:", error);
       alert("Failed to update status");
@@ -187,7 +188,8 @@
                             </td>
                             <td class="text-xs">{formatDate(pay.due_date)}</td>
                             <td class="text-right ">
-                                <button class="btn btn-ghost btn-xs text-secondary" on:click={()=>TechnicianPayUpdate(pay.id)}>Paid</button>
+                                <button class="btn btn-ghost btn-xs text-secondary" on:click={()=>TechnicianPayUpdate(pay.pay_id)}>Paid</button>
+                                {pay.pay_id}
                             </td>
                         </tr>
                     {:else}
