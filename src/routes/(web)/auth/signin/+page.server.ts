@@ -41,14 +41,15 @@ export const actions = {
       const token = responseData.token;
 
       // 5. Set the Cookie (The "Standard" Security Practice)
-      console.log(token);
+      console.log("token", token);
       cookies.set('access_token', token, {
         path: '/',
         httpOnly: true,
         sameSite: 'none',
+        secure: true,
         maxAge: 60 * 60 * 24 // 1 day
       });
-
+      console.log("cookie", cookies.get('access_token'));
     } catch (err) {
       return fail(500, {
         success: false,
