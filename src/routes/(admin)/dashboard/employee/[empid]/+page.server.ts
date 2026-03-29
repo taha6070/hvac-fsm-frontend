@@ -1,9 +1,10 @@
 import { error, fail } from '@sveltejs/kit';
 import type { PageServerLoad, Actions } from './$types';
+import { PUBLIC_API_URL } from '$env/static/public';
 
 export const load: PageServerLoad = async ({ params, fetch, request }) => {
     const { empid } = params;
-    
+
     // Pass cookies forward for authentication if needed
     const cookieHeader = request.headers.get('cookie');
     const headers = {
@@ -13,8 +14,8 @@ export const load: PageServerLoad = async ({ params, fetch, request }) => {
 
     try {
         const [employeeRes, teamsRes] = await Promise.all([
-            fetch(`http://127.0.0.1:8000/api/v1/employees/${empid}`, { headers }),
-            fetch(`http://127.0.0.1:8000/api/v1/team/`, { headers })
+            fetch(`${PUBLIC_API_URL}/employees/${empid}`, { headers }),
+            fetch(`${PUBLIC_API_URL}/team/`, { headers })
         ]);
 
         if (!employeeRes.ok) {
@@ -38,7 +39,7 @@ export const actions = {
     updateEmployee: async ({ request, params, fetch }) => {
         const { empid } = params;
         const data = await request.formData();
-        
+
         const name = data.get('name')?.toString();
         const email = data.get('email')?.toString();
         const phone_no = data.get('phone_no')?.toString();
@@ -52,7 +53,7 @@ export const actions = {
         if (email) updateData.email = email;
         if (phone_no) updateData.phone_no = phone_no;
         if (role) updateData.role = role;
-        
+
         if (team_id_str) {
             updateData.team_id = parseInt(team_id_str, 10);
             if (isNaN(updateData.team_id)) updateData.team_id = null;
@@ -69,9 +70,9 @@ export const actions = {
         }
 
         const cookieHeader = request.headers.get('cookie');
-        
+
         try {
-            const response = await fetch(`http://127.0.0.1:8000/api/v1/employees/${empid}`, {
+            const response = await fetch(`${PUBLIC_API_URL}/employees/${empid}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
@@ -87,8 +88,8 @@ export const actions = {
                     const errorData = await response.json();
                     errorMessage = errorData.detail || errorData.message || errorData.error || errorMessage;
                     if (typeof errorMessage !== 'string') errorMessage = JSON.stringify(errorMessage);
-                } catch (e) {}
-                
+                } catch (e) { }
+
                 return fail(response.status, { error: errorMessage, success: false });
             }
 

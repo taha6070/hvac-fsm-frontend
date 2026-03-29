@@ -1,5 +1,6 @@
 import { fail, redirect } from "@sveltejs/kit";
 import type { Actions } from "@sveltejs/kit";
+import { PUBLIC_API_URL } from "$env/static/public";
 
 export const actions = {
   default: async ({ request, cookies }) => {
@@ -17,7 +18,7 @@ export const actions = {
 
     try {
       // 2. FastAPI Authentication Call
-      const res = await fetch('http://127.0.0.1:8000/api/v1/login', {
+      const res = await fetch(`${PUBLIC_API_URL}/login`, {
         method: 'POST',
         // FastAPI OAuth2 usually expects Form Data, but if your 
         // endpoint expects JSON, keep it as JSON.stringify

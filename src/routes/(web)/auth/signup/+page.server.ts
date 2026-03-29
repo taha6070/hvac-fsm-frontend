@@ -1,6 +1,7 @@
 import { fail } from "@sveltejs/kit";
 import type { Actions } from "@sveltejs/kit";
 import { getFormData } from "$lib/server/event.js";
+import { PUBLIC_API_URL } from '$env/static/public';
 
 export const actions = {
   default: async () => {
@@ -15,7 +16,7 @@ export const actions = {
     }
 try {
       // 2. External API Call
-      const res = await fetch('http://127.0.0.1:8000/api/v1/register', {
+      const res = await fetch(`${PUBLIC_API_URL}/register`, {
         method: 'POST',
         body: JSON.stringify({
           username: email,

@@ -1,5 +1,6 @@
 import { fail } from "@sveltejs/kit";
 import type { Actions } from "./$types";
+import { PUBLIC_API_URL } from "$env/static/public";
 
 export const actions = {
   default: async ({ fetch, request }) => {
@@ -28,7 +29,7 @@ export const actions = {
       // ✅ Log payload before sending to backend
       console.log("Sending to Backend:", payload);
 
-      const response = await fetch('http://127.0.0.1:8000/api/v1/job-type', {
+      const response = await fetch(`${PUBLIC_API_URL}/job-type`, {
         method: 'POST',
         headers: {
           accept: 'application/json',

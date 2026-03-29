@@ -1,5 +1,6 @@
 import { fail } from "@sveltejs/kit";
 import type { Actions } from "./$types";
+import { PUBLIC_API_URL } from "$env/static/public";
 
 export const actions = {
   default: async ({ fetch, request }) => {
@@ -14,11 +15,11 @@ export const actions = {
     // ✅ Log incoming form data (this logs in your server terminal)
     console.log("Incoming Form Data:");
     console.log({
-        emp_id,
-        job_type,
-        amount,
-        helper_deduction,
-        commission
+      emp_id,
+      job_type,
+      amount,
+      helper_deduction,
+      commission
     });
 
     const cookieHeader = request.headers.get('cookie') || '';
@@ -35,7 +36,7 @@ export const actions = {
       // ✅ Log payload before sending to backend
       console.log("Sending to Backend:", payload);
 
-      const response = await fetch(`http://127.0.0.1:8000/api/v1/payrolls`, {
+      const response = await fetch(`${PUBLIC_API_URL}/payrolls`, {
         method: 'POST',
         headers: {
           accept: 'application/json',

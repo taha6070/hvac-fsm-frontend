@@ -2,6 +2,7 @@
   import { ArrowLeft } from "@lucide/svelte";
   import { page } from "$app/state";
   import { goto } from "$app/navigation";
+  import { PUBLIC_API_URL } from "$env/static/public";
 
   export let data;
   const { project, technicianJobs, totalTechJobs } = data;
@@ -12,7 +13,7 @@
   async function generatePays(id: number) {
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/v1/pays/generate?project_id=${id}`,
+        `${PUBLIC_API_URL}/pays/generate?project_id=${id}`,
         {
           method: "POST",
           headers: { Accept: "application/json" },
@@ -36,7 +37,7 @@
     if (!confirm("Are you sure you want to delete this job?")) return;
 
     try {
-      const res = await fetch(`http://127.0.0.1:8000/api/v1/jobs/${slug}`, {
+      const res = await fetch(`${PUBLIC_API_URL}/jobs/${slug}`, {
         method: "DELETE",
         headers: {
           accept: "*/*",
@@ -57,15 +58,12 @@
     if (!confirm("Are you sure you want to delete this helper job?")) return;
 
     try {
-      const res = await fetch(
-        `http://127.0.0.1:8000/api/v1/helper/jobs/${id}`,
-        {
-          method: "DELETE",
-          headers: {
-            accept: "*/*",
-          },
+      const res = await fetch(`${PUBLIC_API_URL}/helper/jobs/${id}`, {
+        method: "DELETE",
+        headers: {
+          accept: "*/*",
         },
-      );
+      });
 
       if (!res.ok) {
         throw new Error("Delete failed");

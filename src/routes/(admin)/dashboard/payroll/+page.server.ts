@@ -1,4 +1,6 @@
 import type { PageServerLoad } from './$types';
+import { PUBLIC_API_URL } from '$env/static/public';
+
 export const load: PageServerLoad = async ({ fetch, url }) => {
     // 1. Extract query params from the current page URL
     // Default to page 1 and limit 10 if not present
@@ -7,7 +9,7 @@ export const load: PageServerLoad = async ({ fetch, url }) => {
     const jobtype = url.searchParams.get('jobtype') || '';
 
     // 2. Construct the backend API URL
-    const apiUrl = new URL(`http://127.0.0.1:8000/api/v1/payrolls`);
+    const apiUrl = new URL(`${PUBLIC_API_URL}/payrolls`);
     apiUrl.searchParams.set('page', page);
     apiUrl.searchParams.set('limit', limit);
 

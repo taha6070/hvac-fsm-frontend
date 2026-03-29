@@ -1,10 +1,11 @@
 import { error, fail } from '@sveltejs/kit';
 import type { PageServerLoad, Actions } from './$types';
+import { PUBLIC_API_URL } from '$env/static/public';
 
 export const load: PageServerLoad = async ({ fetch, params, request }) => {
     const cookieHeader = request.headers.get('cookie') || '';
-    
-    const response = await fetch(`http://127.0.0.1:8000/api/v1/jobs/${params.jbid}`, {
+
+    const response = await fetch(`${PUBLIC_API_URL}/jobs/${params.jbid}`, {
         headers: {
             'accept': 'application/json',
             'cookie': cookieHeader
@@ -24,7 +25,7 @@ export const actions: Actions = {
         const cookieHeader = request.headers.get('cookie') || '';
 
         try {
-            const response = await fetch(`http://127.0.0.1:8000/api/v1/jobs/technican/${params.jbid}`, {
+            const response = await fetch(`${PUBLIC_API_URL}/jobs/technican/${params.jbid}`, {
                 method: 'PATCH',
                 headers: {
                     'accept': 'application/json',
@@ -36,8 +37,8 @@ export const actions: Actions = {
 
             if (!response.ok) {
                 const data = await response.json().catch(() => ({}));
-                return fail(response.status, { 
-                    message: data.detail || "Failed to update job status." 
+                return fail(response.status, {
+                    message: data.detail || "Failed to update job status."
                 });
             }
 

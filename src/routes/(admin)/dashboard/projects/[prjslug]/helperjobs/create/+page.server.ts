@@ -1,6 +1,6 @@
 import { fail } from "@sveltejs/kit";
 import type { Actions } from "./$types";
-
+import { PUBLIC_API_URL } from "$env/static/public";
 
 function toISO(date: string) {
   if (!date) return null;
@@ -15,12 +15,12 @@ export const actions = {
     const addresss = formData.get('address')?.toString();
 
     const status = formData.get('status')?.toString();
-    const prj_id=formData.get("project_id")?.toString();
-    
+    const prj_id = formData.get("project_id")?.toString();
+
     const start_date = formData.get('start_date')?.toString();
     const end_date = formData.get('end_date')?.toString();
     const assigned_to = formData.get('employee_id')?.toString();
-    const job_type=formData.get("jobtype_id")?.toString();
+    const job_type = formData.get("jobtype_id")?.toString();
 
     // ✅ Log incoming form data (this logs in your server terminal)
     console.log("Incoming Form Data:");
@@ -33,19 +33,19 @@ export const actions = {
 
     try {
       const payload = {
-        prj_id:Number(prj_id),
+        prj_id: Number(prj_id),
         addresss,
         status,
-        assigned_to:Number(assigned_to),
-        start_date:toISO(start_date),
-        end_date:toISO(end_date),
-        job_type:Number(job_type)
+        assigned_to: Number(assigned_to),
+        start_date: toISO(start_date),
+        end_date: toISO(end_date),
+        job_type: Number(job_type)
       };
 
       // ✅ Log payload before sending to backend
       console.log("Sending to Backend:", payload);
 
-      const response = await fetch('http://127.0.0.1:8000/api/v1/helper/jobs', {
+      const response = await fetch(`${PUBLIC_API_URL}/helper/jobs`, {
         method: 'POST',
         headers: {
           accept: 'application/json',

@@ -1,9 +1,9 @@
 // src/routes/jobs/+page.server.ts
 import type { PageServerLoad } from './$types';
-
-export const load: PageServerLoad = async ({ params,fetch }) => {
+import { PUBLIC_API_URL } from '$env/static/public';
+export const load: PageServerLoad = async ({ params, fetch }) => {
   const response = await fetch(
-    `http://127.0.0.1:8000/api/v1/helper/jobs?page=1&limit=10&prj_id=${params.prjslug}`,
+    `${PUBLIC_API_URL}/helper/jobs?page=1&limit=10&prj_id=${params.prjslug}`,
     {
       headers: {
         accept: 'application/json'

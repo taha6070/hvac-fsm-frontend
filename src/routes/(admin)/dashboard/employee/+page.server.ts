@@ -1,16 +1,17 @@
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
+import { PUBLIC_API_URL } from '$env/static/public';
 
 export const load: PageServerLoad = async ({ fetch, url, request }) => {
     const cookieHeader = request.headers.get('cookie') || '';
-    
+
     // Get search and pagination params from the URL
     const name = url.searchParams.get('name') || '';
     const page = url.searchParams.get('page') || '1';
     const limit = url.searchParams.get('limit') || '100';
 
     // Construct the API URL
-    let apiUrl = `http://127.0.0.1:8000/api/v1/employees?page=${page}&limit=${limit}`;
+    let apiUrl = `${PUBLIC_API_URL}/employees?page=${page}&limit=${limit}`;
     if (name) {
         apiUrl += `&name=${encodeURIComponent(name)}`;
     }

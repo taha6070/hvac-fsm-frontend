@@ -1,6 +1,7 @@
 import { fail } from "@sveltejs/kit";
 import type { Actions } from "@sveltejs/kit";
 import { getFormData } from "$lib/server/event.js";
+import { PUBLIC_API_URL } from "$env/static/public";
 
 export const actions = {
   default: async ({ request, fetch }) => {
@@ -19,7 +20,7 @@ export const actions = {
       //  Get cookies from incoming request
       const cookie = request.headers.get("cookie");
 
-      const res = await fetch(`http://127.0.0.1:8000/api/v1/employees`, {
+      const res = await fetch(`${PUBLIC_API_URL}/employees`, {
         method: "POST",
         body: JSON.stringify({
           email,

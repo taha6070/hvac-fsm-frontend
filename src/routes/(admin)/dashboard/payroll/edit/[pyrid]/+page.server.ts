@@ -1,10 +1,11 @@
 import { error, redirect } from '@sveltejs/kit';
 import type { PageServerLoad, Actions } from './$types';
+import { PUBLIC_API_URL } from '$env/static/public';
 
 export const load: PageServerLoad = async ({ fetch, params, request }) => {
     const cookieHeader = request.headers.get('cookie') || '';
 
-    const res = await fetch(`http://127.0.0.1:8000/api/v1/payrolls/${params.pyrid}`, {
+    const res = await fetch(`${PUBLIC_API_URL}/payrolls/${params.pyrid}`, {
         headers: { 'cookie': cookieHeader }
     });
 
@@ -36,7 +37,7 @@ export const actions: Actions = {
             amount: Number(formData.get('amount'))
         };
 
-        await fetch(`http://127.0.0.1:8000/api/v1/payrolls/${params.pyrid}`, {
+        await fetch(`${PUBLIC_API_URL}/payrolls/${params.pyrid}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',

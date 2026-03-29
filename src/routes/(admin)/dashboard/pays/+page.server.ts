@@ -1,13 +1,14 @@
 // +page.server.ts
 import type { PageServerLoad } from './$types';
 import { error } from '@sveltejs/kit';
+import { PUBLIC_API_URL } from '$env/static/public';
 
 export const load: PageServerLoad = async ({ fetch, url }) => {
     const page = url.searchParams.get('page') || '1';
     const limit = url.searchParams.get('limit') || '100';
     const employee = url.searchParams.get('employee') || '';
 
-    const apiUrl = new URL('http://127.0.0.1:8000/api/v1/pays');
+    const apiUrl = new URL(`${PUBLIC_API_URL}/pays`);
     apiUrl.searchParams.set('page', page);
     apiUrl.searchParams.set('limit', limit);
 

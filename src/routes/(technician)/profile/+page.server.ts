@@ -1,5 +1,6 @@
 import { fail } from '@sveltejs/kit';
 import type { Actions } from './$types';
+import { PUBLIC_API_URL } from '$env/static/public';
 
 export const actions = {
     resetPassword: async ({ request, fetch }) => {
@@ -20,7 +21,7 @@ export const actions = {
         const cookieHeader = request.headers.get('cookie');
 
         try {
-            const response = await fetch('http://127.0.0.1:8000/api/v1/reset-password', {
+            const response = await fetch(`${PUBLIC_API_URL}/reset-password`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -1,16 +1,17 @@
 import { redirect, error } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
+import { PUBLIC_API_URL } from "$env/static/public";
 
 export const load: PageServerLoad = async ({ fetch, request, url }) => {
     const page = url.searchParams.get('page') || '1';
     const limit = url.searchParams.get('limit') || '10';
-    const dateFilter = url.searchParams.get('date_filter') || ''; 
+    const dateFilter = url.searchParams.get('date_filter') || '';
     const status = url.searchParams.get('status') || ''; // Capture status
 
     const cookieHeader = request.headers.get('cookie') || '';
 
     try {
-        const apiUrl = new URL(`http://127.0.0.1:8000/api/v1/jobs`);
+        const apiUrl = new URL(`${PUBLIC_API_URL}/jobs`);
         apiUrl.searchParams.set('page', page);
         apiUrl.searchParams.set('limit', limit);
         if (dateFilter) apiUrl.searchParams.set('date_filter', dateFilter);

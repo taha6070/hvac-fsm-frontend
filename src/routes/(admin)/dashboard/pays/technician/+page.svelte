@@ -3,7 +3,7 @@
     let employee_name = "";
     let month = new Date().getMonth() + 1;
     let year = new Date().getFullYear();
-
+    import { PUBLIC_API_URL } from "$env/static/public";
     let employees = [];
     let payroll = null;
     let loading = false;
@@ -35,7 +35,7 @@
 
         try {
             const res = await fetch(
-                `http://127.0.0.1:8000/api/v1/employees?page=1&limit=10&name=${employee_name}`
+                `${PUBLIC_API_URL}/employees?page=1&limit=10&name=${employee_name}`
             );
             employees = await res.json();
         } catch (err) {
@@ -53,7 +53,7 @@
 
         try {
             const res = await fetch(
-                `http://127.0.0.1:8000/api/v1/pays/employee/${employee_id}/monthly-pays?year=${year}&month=${month}`
+                `${PUBLIC_API_URL}/pays/employee/${employee_id}/monthly-pays?year=${year}&month=${month}`
             );
             payroll = await res.json();
         } catch (err) {

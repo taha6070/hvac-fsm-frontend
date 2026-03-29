@@ -1,11 +1,12 @@
 import { error } from '@sveltejs/kit';
-import type  { PageServerLoad } from '../$types';
+import type { PageServerLoad } from '../$types';
+import { PUBLIC_API_URL } from '$env/static/public';
 
-const API_BASE = 'http://127.0.0.1:8000/api/v1';
+const API_BASE = PUBLIC_API_URL;
 
 export const load: PageServerLoad = async ({ fetch, url, request }) => {
     const cookieHeader = request.headers.get('cookie') || '';
-    
+
     // 1. Get query params from URL
     const employeeSearch = url.searchParams.get('search') || '';
     const selectedEmpId = url.searchParams.get('emp_id') || '';

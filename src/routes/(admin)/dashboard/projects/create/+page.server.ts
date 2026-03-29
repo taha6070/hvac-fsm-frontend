@@ -1,5 +1,6 @@
 import { fail } from "@sveltejs/kit";
 import type { Actions } from "./$types";
+import { PUBLIC_API_URL } from "$env/static/public";
 
 
 function toISO(date: string) {
@@ -17,10 +18,10 @@ export const actions = {
 
     const status = formData.get('status')?.toString();
     const service_type = formData.get('service_type')?.toString();
-    
+
     const start_date = formData.get('start_date')?.toString();
     const end_date = formData.get('end_date')?.toString();
-    const total_invoice=formData.get('total_invoice')
+    const total_invoice = formData.get('total_invoice')
     const customer_id = formData.get('customer_id')?.toString();
 
     // ✅ Log incoming form data (this logs in your server terminal)
@@ -39,16 +40,16 @@ export const actions = {
         addresss,
         service_type,
         status,
-        total_invoice:Number(total_invoice),
-        customer_id:Number(customer_id),
-        start_date:toISO(start_date),
-        end_date:toISO(end_date)
+        total_invoice: Number(total_invoice),
+        customer_id: Number(customer_id),
+        start_date: toISO(start_date),
+        end_date: toISO(end_date)
       };
 
       // ✅ Log payload before sending to backend
       console.log("Sending to Backend:", payload);
 
-      const response = await fetch('http://127.0.0.1:8000/api/v1/projects/', {
+      const response = await fetch(`${PUBLIC_API_URL}/projects/`, {
         method: 'POST',
         headers: {
           accept: 'application/json',

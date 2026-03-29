@@ -1,17 +1,19 @@
 import { fail } from "@sveltejs/kit";
 import type { Actions } from "./$types";
+import { PUBLIC_API_URL } from "$env/static/public";
+
 
 export const actions = {
     default: async ({ fetch, request }) => {
         const cookieHeader = request.headers.get('cookie') || '';
 
         try {
-            const response = await fetch('http://127.0.0.1:8000/api/v1/me', {
+            const response = await fetch(`${PUBLIC_API_URL}/me`, {
                 method: 'POST',
                 headers: {
                     'accept': 'application/json',
                     'Content-Type': 'application/json',
-                    'cookie': cookieHeader 
+                    'cookie': cookieHeader
                 },
                 body: JSON.stringify({})
             });
