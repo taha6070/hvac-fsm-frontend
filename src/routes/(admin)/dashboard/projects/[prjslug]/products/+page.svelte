@@ -3,11 +3,12 @@
   import { goto } from "$app/navigation";
   import { enhance } from "$app/forms";
   import { page } from "$app/state";
+  import { PUBLIC_API_URL } from "$env/static/public";
   // Props
   let { data, form } = $props();
 
   // Constants & State
-  const API_BASE = "http://127.0.0.1:8000/api/v1";
+  const API_BASE = PUBLIC_API_URL;
   const PRJ_ID = page.params.prjslug;
 
   let installations = $state([]);
