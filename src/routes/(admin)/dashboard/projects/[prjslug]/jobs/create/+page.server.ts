@@ -13,7 +13,8 @@ export const actions = {
   default: async ({ fetch, request }) => {
     const formData = await request.formData();
 
-    const addresss = formData.get('address')?.toString();
+    // const addresss = formData.get('address')?.toString();
+    const addresss = null;
 
     const status = formData.get('status')?.toString();
     const project_id = formData.get("project_id")?.toString();

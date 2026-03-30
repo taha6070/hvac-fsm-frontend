@@ -12,7 +12,8 @@ export const actions = {
   default: async ({ fetch, request }) => {
     const formData = await request.formData();
 
-    const addresss = formData.get('address')?.toString();
+    // const addresss = formData.get('address')?.toString();
+    const addresss = null;
 
     const status = formData.get('status')?.toString();
     const prj_id = formData.get("project_id")?.toString();
@@ -34,7 +35,7 @@ export const actions = {
     try {
       const payload = {
         prj_id: Number(prj_id),
-        addresss,
+        // addresss,
         status,
         assigned_to: Number(assigned_to),
         start_date: toISO(start_date),

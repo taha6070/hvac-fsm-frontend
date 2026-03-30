@@ -115,7 +115,7 @@
           </div>
 
           <!-- Address -->
-          <div class="form-control w-full">
+          <!-- <div class="form-control w-full">
             <label class="label" for="address">
               <span class="label-text font-medium text-base-content/80"
                 >Address <span class="text-error">*</span></span
@@ -136,8 +136,8 @@
                 name="address"
                 required
               />
-            </div>
-          </div>
+            </div> -->
+          <!-- </div> -->
         </div>
 
         <!-- Service Dates -->
